@@ -39,7 +39,7 @@ public class Main {
     });
 
     get("/callback", (request, response) -> {
-      return request.contextPath() + '\n' + request.servletPath();; 
+      return request.contextPath() + '\n' + request.servletPath();
     });
 
     get("/", (request, response) -> {

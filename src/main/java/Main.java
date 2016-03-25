@@ -30,9 +30,13 @@ public class Main {
 
     get("/oauth2", (request, response) -> {
       StringBuilder redirectUrl = new StringBuilder();
-      redirectUrl.append("https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=").append(CLIENT_ID).append("&redirect_uri=").append(URLEncoder.encode(APP_HOST + "/callback"));
+      redirectUrl.append("https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=")
+                 .append(CLIENT_ID)
+                 .append("&redirect_uri=")
+                 .append(URLEncoder.encode(APP_HOST + "/callback"));
       response.redirect(redirectUrl.toString());
-    }, null);
+      return null;
+    });
 
     get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();

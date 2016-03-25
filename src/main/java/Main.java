@@ -40,7 +40,7 @@ public class Main {
     });
 
     get("/callback", (request, response) -> {
-      return request.headers("code");
+      return request.queryParams("code");
     });
 
     get("/", (request, response) -> {

@@ -38,6 +38,10 @@ public class Main {
       return null;
     });
 
+    get("/callback", (req, res) -> {
+      return request.uri();
+    });
+
     get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("message", "Hello World!");

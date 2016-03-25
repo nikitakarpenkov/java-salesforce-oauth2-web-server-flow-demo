@@ -19,6 +19,7 @@ import com.heroku.sdk.jdbc.DatabaseUrl;
 public class Main {
 
   private static final String CLIENT_ID = "3MVG9Rd3qC6oMalXohixmFPPMKzEwbcTwF5FzVCrDL9DyMFdr.h1.HrFzhd8CwbAxiXx2a6aV.uNnJiap07BV";
+  private static final String CLIENT_SECRET = "2223890121992725601";
   private static final String APP_HOST = "https://warm-fortress-58277.herokuapp.com";
 
   public static void main(String[] args) {
@@ -30,7 +31,7 @@ public class Main {
 
     get("/oauth2", (request, response) -> {
       StringBuilder redirectUrl = new StringBuilder();
-      redirectUrl.append("https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=")
+      redirectUrl.append("https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=")
                  .append(CLIENT_ID)
                  .append("&redirect_uri=")
                  .append(URLEncoder.encode(APP_HOST + "/callback"));
@@ -39,7 +40,7 @@ public class Main {
     });
 
     get("/callback", (request, response) -> {
-      return request.contextPath() + '\n' + request.servletPath();
+      return request.headers("code")
     });
 
     get("/", (request, response) -> {

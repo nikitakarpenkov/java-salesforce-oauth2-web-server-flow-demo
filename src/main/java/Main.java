@@ -38,7 +38,7 @@ public class Main {
       return null;
     });
 
-    get("/callback", (req, res) -> {
+    get("/callback", (request, response) -> {
       return request.uri();
     });
 

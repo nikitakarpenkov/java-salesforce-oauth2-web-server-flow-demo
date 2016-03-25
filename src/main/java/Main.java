@@ -39,7 +39,7 @@ public class Main {
     });
 
     get("/callback", (request, response) -> {
-      return request.headers().toString();
+      return request.contextPath() + '\n' + request.servletPath();; 
     });
 
     get("/", (request, response) -> {

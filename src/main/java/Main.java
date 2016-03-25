@@ -28,12 +28,12 @@ public class Main {
 
     get("/hello", (req, res) -> "Hello World");
 
-    get("/oauth2", (req, res) -> {
+    get("/oauth2", (request, response) -> {
       StringBuilder redirectUrl = new StringBuilder();
       redirectUrl.append("https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=")
                  .append(CLIENT_ID).append("&redirect_uri=")
                  .append(URLEncoder.encode(APP_HOST + "/callback"));
-      res.redirect(redirectUrl.toString());
+      response.redirect(redirectUrl.toString());
     });
 
     get("/", (request, response) -> {

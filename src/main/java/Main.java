@@ -64,6 +64,7 @@ public class Main {
 
       List<NameValuePair> urlParameters = new ArrayList<NameValuePair>(2);
       urlParameters.add(new BasicNameValuePair("grant_type", "authorization_code"));
+      urlParameters.add(new BasicNameValuePair("client_id", CLIENT_ID));
       urlParameters.add(new BasicNameValuePair("code", request.queryParams("code")));
       urlParameters.add(new BasicNameValuePair("client_secret", CLIENT_SECRET));
       urlParameters.add(new BasicNameValuePair("redirect_uri", APP_HOST + "/callback"));

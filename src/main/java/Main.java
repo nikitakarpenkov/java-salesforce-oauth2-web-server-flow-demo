@@ -2,6 +2,10 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import java.lang.StringBuilder;
 
@@ -9,12 +13,23 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 
+import org.apache.http.client.methods.HttpGet;
+
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
 import static spark.Spark.get;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 public class Main {
 
@@ -40,7 +55,36 @@ public class Main {
     });
 
     get("/callback", (request, response) -> {
-      return request.queryParams("code");
+
+      String authorizationCode = request.queryParams("code");
+
+      String obtainAccessTokenApiUrl = "https://login.salesforce.com/services/oauth2/token";
+
+      HttpClient httpClient = new DefaultHttpClient();
+      HttpPost httpPost = new HttpPost(obtainAccessTokenApiUrl);
+
+      List<NameValuePair> urlParameters = new ArrayList<NameValuePair>(2);
+      urlParameters.add(new BasicNameValuePair("grant_type", "authorization_code"));
+      urlParameters.add(new BasicNameValuePair("code", request.queryParams("code")));
+      urlParameters.add(new BasicNameValuePair("client_secret", CLIENT_SECRET));
+      urlParameters.add(new BasicNameValuePair("redirect_uri", APP_HOST + "/callback"));
+
+      httpPost.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+      HttpResponse httpResponse = httpClient.execute(httpPost);
+
+      //System.out.println("Response Code : " + 
+      //                                httpResponse.getStatusLine().getStatusCode());
+
+      BufferedReader responseReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+      StringBuilder result = new StringBuilder();
+      String responseLine = "";
+      while ((responseLine = responseReader.readLine()) != null) {
+        result.append(responseLine);
+      }
+
+      return result.toString();
+
     });
 
     get("/", (request, response) -> {

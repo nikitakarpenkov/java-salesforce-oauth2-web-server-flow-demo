@@ -33,10 +33,9 @@ import org.apache.http.message.BasicNameValuePair;
 
 public class Main {
 
-  private static final String CLIENT_ID = "3MVG9Rd3qC6oMalXohixmFPPMKzEwbcTwF5FzVCrDL9DyMFdr.h1.HrFzhd8CwbAxiXx2a6aV.uNnJiap07BV";
-  private static final String CLIENT_SECRET = "2223890121992725601";
-  private static final String APP_HOST = "https://warm-fortress-58277.herokuapp.com";
-
+  private static final String CLIENT_ID = "3MVG9Rd3qC6oMalXohixmFPPMKxlKvHEx.6ibcbLoxfJyOX4Eo9A8MjrI7ECEwG4g58ptkG0mUkdwFYcTU.Qi";
+  private static final String CLIENT_SECRET = "987709099253317957";
+  private static final String APP_HOST = "http://localhost:5000";
   public static void main(String[] args) {
 
     port(Integer.valueOf(System.getenv("PORT")));

@@ -1,8 +1,8 @@
-# java-getting-started
+# java-salesforce-oauth2-web-server-flow-demo
 
-A barebones Java app, which can easily be deployed to Heroku.
+A barebones Java app with [Salesforce OAuth 2.0 Web Sever Flow](https://developer.salesforce.com/page/Digging_Deeper_into_OAuth_2.0_on_Force.com#Obtaining_an_Access_Token_in_a_Web_Application_.28Web_Server_Flow.29) implemented, which can easily be deployed to Heroku.
 
-This application supports the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
+This application is based on the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
